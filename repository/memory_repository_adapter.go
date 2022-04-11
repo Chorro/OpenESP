@@ -1,6 +1,9 @@
 package repository
 
-import "github.com/chorro/openesp/model"
+import (
+	"github.com/chorro/openesp/model"
+	"github.com/chorro/openesp/util"
+)
 
 type memoryRepositoryAdapter struct {
 	devices map[string]model.Device
@@ -13,8 +16,9 @@ func NewMemoryDeviceRepository() DeviceRepository {
 }
 
 func (m *memoryRepositoryAdapter) CreateDevice(name string) error {
-	m.devices["1"] = model.Device{
-		ID:   "1",
+	ID := util.GenerateID()
+	m.devices[ID] = model.Device{
+		ID:   ID,
 		Name: name,
 	}
 
