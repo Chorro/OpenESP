@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
+	"github.com/chorro/openesp/api"
 	"github.com/chorro/openesp/repository"
 	"github.com/chorro/openesp/service"
 )
@@ -12,11 +14,7 @@ func main() {
 
 	deviceService := service.NewDeviceRule(memoryRepository)
 
-	deviceService.CreateDevice("my-device")
-	if err := deviceService.CreateDevice("too-long-device-name."); err != nil {
-		fmt.Println("error: ", err)
-	}
-
-	devices, _ := deviceService.GetDevices()
-	fmt.Println(devices)
+	api := api.NewRestAPI(deviceService)
+	fmt.Println("up and running: 0.0.0.0:8000")
+	http.ListenAndServe("0.0.0.0:8000", api.Router())
 }
