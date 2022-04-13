@@ -38,13 +38,13 @@ func (m *memoryRuleAdapter) GetDevices() (model.DevicesList, error) {
 }
 
 func (m *memoryRuleAdapter) GetDeviceByID(ID string) (*model.Device, error) {
-	return nil, nil
+	return m.Repository.GetDeviceByID(ID)
 }
 
 func (m *memoryRuleAdapter) UpdateDevice(device model.Device) error {
-	return nil
+	return m.Repository.UpdateDevice(device)
 }
 
 func (m *memoryRuleAdapter) DeleteDeviceByID(ID string) error {
-	return nil
+	return m.Repository.DeleteDeviceByID(ID)
 }
